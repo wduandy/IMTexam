@@ -1,2 +1,2 @@
-# IMTexam
-Isabella's Maths and Tikz exam class template is a fully customized exam class for typesetting exams, exercise lists and solutions.
+# IMTexam and IMTtikz
+Isabella's Maths and Tikz exam class template and the matching package are fully customized for typesetting exams, exercise lists and solutions in LaTeX.
