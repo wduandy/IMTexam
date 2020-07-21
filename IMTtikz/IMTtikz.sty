@@ -33,23 +33,17 @@
 \DeclareOption{enums}{\global\settoggle{cen}{true}}
 \newtoggle{ws}
 \DeclareOption{weirdsymbols}{\global\settoggle{ws}{true}}
+\newtoggle{py}
+\DeclareOption{python}{\global\settoggle{py}{true}}
+\newtoggle{mat}
+\DeclareOption{mathematica}{\global\settoggle{mat}{true}}
+\newtoggle{ci}
+\DeclareOption{cite}{\global\settoggle{ci}{true}}
 
 \DeclareOption*{\PackageWarning{ipatikz}{Unknown ‘\CurrentOption’}}
 \ProcessOptions*\relax
 
 \RequirePackage{amsmath}
-
-\iftoggle{brm}{
-	\let\sin\relax\DeclareMathOperator{\sin}{sen}
-	\DeclareMathOperator{\sen}{sen}
-	\let\tan\relax\DeclareMathOperator{\tan}{tg}
-	\DeclareMathOperator{\tg}{tg}
-	\let\cot\relax\DeclareMathOperator{\cot}{cotg}
-	\DeclareMathOperator{\cotg}{cotg}
-	\let\csc\relax\DeclareMathOperator{\csc}{cossec}
-	\DeclareMathOperator{\cossec}{cossec}
-	\DeclareMathOperator{\cis}{cis}
-}{}
 
 \RequirePackage{amsfonts, amsthm, amssymb}
 \RequirePackage{mathtools, empheq, xfrac, cancel}
@@ -67,6 +61,31 @@
 	%\RequirePackage{upgreek}
 	\RequirePackage[bold-style=upright,mathbf=sym,mathrm=sym]{unicode-math}
 	\setmathfont{Latin Modern Math}
+	\iftoggle{brm}{
+		\def\sin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
+		\def\sen{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
+		\def\arcsin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
+		\def\arcsen{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
+		\def\tan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
+		\def\tg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
+		\def\arctan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
+		\def\arctg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
+		\def\cot{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
+		\def\cotg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
+		\def\csc{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
+		\def\cossec{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
+		\def\cis{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cis}}}
+	}{
+	\def\sin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sin}}}
+	\def\sinh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sinh}}}
+	\def\cosh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosh}}}
+	\def\tan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tan}}}
+	\def\tanh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tanh}}}
+	\def\cot{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cot}}}
+	\def\coth{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font coth}}}
+	\def\sec{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sec}}}
+	\def\csc{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font csc}}}
+	}
 	%\setmathfont[range=up/{Greek,greek}]{CMU Sans Serif}
 	% Negrito para notação de vetor
 	\renewcommand{\vec}[1]{\mathbf{#1}}
@@ -81,6 +100,21 @@
 	\newcommand{\ehat}[1]{\hat{e}_{\vec{#1}}}
 \else
 	\RequirePackage{upgreek,bm}
+	\iftoggle{brm}{
+		\let\sin\relax\DeclareMathOperator{\sin}{sen}
+		\DeclareMathOperator{\sen}{sen}
+		\let\sin\relax\DeclareMathOperator{\arcsin}{arcsen}
+		\DeclareMathOperator{\arcsen}{arcsen}
+		\let\tan\relax\DeclareMathOperator{\tan}{tg}
+		\DeclareMathOperator{\tg}{tg}
+		\let\tan\relax\DeclareMathOperator{\arctan}{arctg}
+		\DeclareMathOperator{\arctg}{arctg}
+		\let\cot\relax\DeclareMathOperator{\cot}{cotg}
+		\DeclareMathOperator{\cotg}{cotg}
+		\let\csc\relax\DeclareMathOperator{\csc}{cossec}
+		\DeclareMathOperator{\cossec}{cossec}
+		\DeclareMathOperator{\cis}{cis}
+	}{}
 	% Negrito para notação de vetor
 	\renewcommand{\vec}[1]{\bm{\mathrm{#1}}}
 %	
@@ -93,8 +127,6 @@
 	\newcommand{\that}{\hat{\uptheta}}
 	\newcommand{\ehat}[1]{\hat{e}_{\vec{#1}}}
 \fi
-
-
 
 
 \def\<#1>{\langle\ignorespaces#1\unskip\rangle}
@@ -110,11 +142,15 @@
 
 \iftoggle{eng}{	
 }{\sisetup{
-	range-phrase={ à },
-	list-pair-separator={ e },
-	list-final-separator={ e },
+	range-phrase={\text{ à }},
+	list-pair-separator={\text{ e }},
+	list-separator={; },
+	list-final-separator={\text{ e }},
 	output-decimal-marker={,},}
 }
+
+\DeclareSIUnit{\lightyear}{ly}
+\DeclareSIUnit{\rpm}{rpm}
 
 \RequirePackage{pgfplots, tikz}
 
@@ -188,6 +224,12 @@
 		\draw[/curlybrace/.cd,curlybrace,#1]  (#2:#4-\cbrd) -- (#2:#4) arc (#2:{(#2+#3)/2-\cb@angle}:#4) --({(#2+#3)/2}:#4+\cbrd) coordinate (curlybracetipn);
 		\draw[/curlybrace/.cd,curlybrace,#1] ({(#2+#3)/2}:#4+\cbrd) -- ({(#2+#3)/2+\cb@angle}:#4) arc ({(#2+#3)/2+\cb@angle} :#3:#4) --(#3:#4-\cbrd);
 	}
+%
+	\tikzset{
+		ragged border/.style={ decoration={random steps, segment length=1mm, amplitude=0.5mm},
+			decorate,
+		}
+	}
 }{}
 
 \RequirePackage{environ, xargs}
@@ -195,10 +237,11 @@
 \newcommandx{\startmulti}[2][1=2,2=c]{
 	\begingroup%
 	\pgfmathsetmacro{\amtoskip}{1/#1 - 0.05/#1}%
-	\newcommandx{\nach}{\end{minipage}\hfill\begin{minipage}[#2]{\amtoskip\linewidth}}
+	\newcommandx{\nextcol}{\end{minipage}\hfill\begin{minipage}[#2]{\amtoskip\linewidth}}
 	\begin{minipage}[#2]{\amtoskip\linewidth}}
 	
 \NewEnviron{multi}{\vspace{-\parskip}\expandafter\startmulti\BODY\end{minipage}\endgroup}
+
 
 \newcommandx{\correctspacing}[1][1=1]{\vspace{-#1\abovedisplayskip}}
 
@@ -292,7 +335,7 @@
 }{}
 
 \iftoggle{cen}{
-	\RequirePackage{enumitem}
+	\RequirePackage[inline]{enumitem}
 	\setenumerate{itemindent=0.25cm,labelsep=0.1cm}
 %	
 	\newcounter{examplecounter}
@@ -312,6 +355,35 @@
 %	
 	\newlist{romanlistinline}{enumerate*}{1}
 	\setlist[romanlistinline]{label=(\Roman*)}
+%	
+	\newlist{unindent}{enumerate}{1}
+	\setlist[unindent]{wide, labelwidth=!, labelindent=0pt,label=(\arabic*),resume=unindent}
+	\newcommand{\changelabel}[1]{\setlist[unindent]{wide, labelwidth=!, labelindent=0pt,label=#1,resume=unindent}}
+%
+	\RequirePackage{multicol}
+	\newcommandx{\topenum}[2][1=2,2=1]{
+		\pgfmathsetmacro{\maxcount}{int(#1 - 1)}%
+		\pgfmathsetmacro{\amtoskipcol}{0.05*2/#1}%
+		\setlength\columnsep{\amtoskipcol\linewidth}
+		\begin{multicols}{#1}
+			\begin{unindent}[start=#2]
+				\item
+			\end{unindent}
+			\columnbreak
+			\foreach \i in {1,...,\maxcount}{%
+				\begin{unindent}[]
+					\item
+				\end{unindent}
+				\ifnumequal{\i}{\maxcount}{}{\columnbreak}
+			}
+		\end{multicols}}
+	\newcommandx{\fixtopalign}{\strut\vspace*{-\baselineskip}\newline}
+%	
+	\newcommandx{\un}[1][1=]{\begin{unindent}[#1]
+		\item }
+	\newcommandx{\en}{\end{unindent}}
+	\newcommandx{\vst}{\vspace{\stretch{1}}}
+	\newcommandx{\vstst}{\strut\vspace*{\stretch{1}}}
 }{}
 
 \iftoggle{xk}{
@@ -352,4 +424,48 @@
 	\end{center}}
 }{}
 
+\iftoggle{py}{
+	\RequirePackage{listings}
+	\setmonofont{Flux}
+	\lstset{language=Python,basicstyle=\ttfamily,tabsize=3}
+}{}
 
+\iftoggle{mat}{
+	\RequirePackage{mmacells}
+	\mmaDefineMathReplacement{>=}{\geqslant}
+	\mmaDefineMathReplacement{Delta}{\Delta}
+	\mmaDefineMathReplacement{mu}{\mu}
+}{}
+
+\iftoggle{ci}{
+	\RequirePackage[font=itshape]{quoting}
+}{}
+
+
+\makeatletter
+\define@choicekey{datetime2.sty}{useregional}[\val\DTM@nr]%
+{false,text,numeric,num}[text]%
+{%
+	\ifcase\DTM@nr\relax
+	\renewcommand*{\DTMifcaseregional}[3]{##1}%
+	\or
+	\renewcommand*{\DTMifcaseregional}[3]{##2}%
+	\or
+	\renewcommand*{\DTMifcaseregional}[3]{##3}%
+	\or
+	\renewcommand*{\DTMifcaseregional}[3]{##3}%
+	\fi
+}
+\let\nr\relax
+\makeatother
+\RequirePackage{nccmath}
+\RequirePackage{xpatch}
+\xpatchcmd{\NCC@ignorepar}{%
+	\abovedisplayskip\abovedisplayshortskip}
+{%
+	\addtolength\abovedisplayskip{-1ex}%
+	\addtolength\belowdisplayskip{-1ex}%
+%	\abovedisplayskip\abovedisplayshortskip%
+%	\belowdisplayskip\belowdisplayshortskip
+}
+{}{}
