@@ -40,12 +40,10 @@
 \newtoggle{ci}
 \DeclareOption{cite}{\global\settoggle{ci}{true}}
 
-\DeclareOption*{\PackageWarning{ipatikz}{Unknown ‘\CurrentOption’}}
+\DeclareOption*{\PackageWarning{IMTtikz}{Unknown ‘\CurrentOption’}}
 \ProcessOptions*\relax
 
-\RequirePackage{amsmath}
-
-\RequirePackage{amsfonts, amsthm, amssymb}
+\RequirePackage{amsmath, amsfonts, amsthm, amssymb}
 \RequirePackage{mathtools, empheq, xfrac, cancel}
 % Notação de derivadas
 \RequirePackage[thinc]{esdiff}
@@ -62,29 +60,29 @@
 	\RequirePackage[bold-style=upright,mathbf=sym,mathrm=sym]{unicode-math}
 	\setmathfont{Latin Modern Math}
 	\iftoggle{brm}{
-		\def\sin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
-		\def\sen{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
-		\def\arcsin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
-		\def\arcsen{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
-		\def\tan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
-		\def\tg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
-		\def\arctan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
-		\def\arctg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
-		\def\cot{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
-		\def\cotg{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
-		\def\csc{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
-		\def\cossec{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
-		\def\cis{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cis}}}
+		\let\sin\relax\DeclareMathOperator{\sin}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
+		\DeclareMathOperator{\sen}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sen}}}
+		\let\arcsin\relax\DeclareMathOperator{\arcsin}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
+		\DeclareMathOperator{\arcsen}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arcsen}}}
+		\let\tan\relax\DeclareMathOperator{\tan}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
+		\DeclareMathOperator{\tg}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tg}}}
+		\let\arctan\relax\DeclareMathOperator{\arctan}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
+		\DeclareMathOperator{\arctg}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font arctg}}}
+		\let\cot\relax\DeclareMathOperator{\cot}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
+		\DeclareMathOperator{\cotg}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cotg}}}
+		\let\csc\relax\DeclareMathOperator{\csc}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
+		\DeclareMathOperator{\cossec}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosec}}}
+		\DeclareMathOperator{\cis}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cis}}}
 	}{
-	\def\sin{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sin}}}
-	\def\sinh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sinh}}}
-	\def\cosh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosh}}}
-	\def\tan{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tan}}}
-	\def\tanh{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tanh}}}
-	\def\cot{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cot}}}
-	\def\coth{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font coth}}}
-	\def\sec{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sec}}}
-	\def\csc{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font csc}}}
+		\let\sin\relax\DeclareMathOperator{\sin}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sin}}}
+		\let\sinh\relax\DeclareMathOperator{\sinh}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sinh}}}
+		\let\cosh\relax\DeclareMathOperator{\cosh}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cosh}}}
+		\let\tan\relax\DeclareMathOperator{\tan}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tan}}}
+		\let\tanh\relax\DeclareMathOperator{\tanh}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font tanh}}}
+		\let\cot\relax\DeclareMathOperator{\cot}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font cot}}}
+		\let\coth\relax\DeclareMathOperator{\coth}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font coth}}}
+		\let\sec\relax\DeclareMathOperator{\sec}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font sec}}}
+		\let\csc\relax\DeclareMathOperator{\csc}{\qopname\relax o{\vphantom{\operator@font cos}\smash{\operator@font csc}}}
 	}
 	%\setmathfont[range=up/{Greek,greek}]{CMU Sans Serif}
 	% Negrito para notação de vetor
@@ -103,11 +101,11 @@
 	\iftoggle{brm}{
 		\let\sin\relax\DeclareMathOperator{\sin}{sen}
 		\DeclareMathOperator{\sen}{sen}
-		\let\sin\relax\DeclareMathOperator{\arcsin}{arcsen}
+		\let\arcsin\relax\DeclareMathOperator{\arcsin}{arcsen}
 		\DeclareMathOperator{\arcsen}{arcsen}
 		\let\tan\relax\DeclareMathOperator{\tan}{tg}
 		\DeclareMathOperator{\tg}{tg}
-		\let\tan\relax\DeclareMathOperator{\arctan}{arctg}
+		\let\arctan\relax\DeclareMathOperator{\arctan}{arctg}
 		\DeclareMathOperator{\arctg}{arctg}
 		\let\cot\relax\DeclareMathOperator{\cot}{cotg}
 		\DeclareMathOperator{\cotg}{cotg}
@@ -179,25 +177,27 @@
 \newcommand{\tikzmark}[1]{\tikzset{external/export next=false}
 	\tikz[baseline,remember picture] \coordinate (#1) {};}
 
+%\usepackage{tkz-euclide} %euclidean geometry
+
 
 \iftoggle{ws}{
 	% define colors
 	\definecolor{redAr}{RGB}{186, 1, 1}
 	\definecolor{greenAr}{RGB}{0, 204, 47}
-	
-	
+%	
+%	
 	%define tikz curvedarrow command
 	\newcommand\curvedarrow{}
 	\def\curvedarrow[#1]#2(#3:#4 #5:#6)% [color,draw options] (initial node:arc length final node:arc length)
 	{\draw[-latex,color=#1] let \p1=($({#3}.north) +(2.7pt, 8pt)$), \p2=($({#5}.north) +(2.7pt, 8pt)$) in (\p1) .. controls ($(\p1)!#4!90:(\p2)$) and ($(\p2)!#6!270:(\p1)$) .. (\p2);}
-	
+%	
 	%define new tikz command for wrapping an arc with curly brace
 	\DeclareFontFamily{U}{tipa}{}
 	\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
 	\newcommand{\arc@char}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}%
-	
+%	
 	\newcommand{\arc}[1]{\mathpalette\arc@arc{#1}}
-	
+%	
 	\newcommand{\arc@arc}[2]{%
 		\sbox0{$\m@th#1#2$}%
 		\vbox{
@@ -206,7 +206,7 @@
 			\box0
 		}%
 	}
-	
+%	
 	\tikzset{curlybrace/.style={rounded corners=2pt,line cap=round}}%  
 	\pgfkeys{%
 		/curlybrace/.cd,%
